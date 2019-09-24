@@ -1,4 +1,4 @@
-<div class="ngx-timepicker" [ngClass]="{'ngx-timepicker--disabled': disabled}">
+<div class="ngx-timepicker" [ngClass]="{'ngx-timepicker--disabled': disabled}" #trigger>
     <ngx-timepicker-time-control
         class="ngx-timepicker__control--first"
         [placeholder]="'HH'"
@@ -39,6 +39,7 @@
     </ngx-material-timepicker-toggle>
 </div>
 <ngx-material-timepicker
+    [trigger]="trigger"
     [ngxMaterialTimepickerTheme]="clockTheme"
     [defaultTime]="timepickerTime"
     [format]="format"

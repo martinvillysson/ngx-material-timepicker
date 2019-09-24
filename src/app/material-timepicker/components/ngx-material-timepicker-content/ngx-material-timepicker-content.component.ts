@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { ClockFaceTime } from '../../models/clock-face-time.interface';
 import { TimePeriod } from '../../models/time-period.enum';
 import { TimeUnit } from '../../models/time-unit.enum';
@@ -10,7 +10,6 @@ import { shareReplay, takeUntil } from 'rxjs/operators';
 import { TimeAdapter } from '../../services/time-adapter';
 import { TimepickerRef } from '../../models/timepicker-ref.interface';
 import { TimepickerConfig } from '../../models/timepicker-config.interface';
-import { NgxMaterialTimepickerEventService } from '../../services/ngx-material-timepicker-event.service';
 
 export enum AnimationState {
     ENTER = 'enter',
@@ -71,14 +70,7 @@ export class NgxMaterialTimepickerContentComponent implements OnInit, OnDestroy,
 
     private unsubscribe = new Subject();
 
-    constructor(private timepickerService: NgxMaterialTimepickerService,
-                private eventService: NgxMaterialTimepickerEventService) {
-    }
-
-    @HostListener('keydown', ['$event'])
-    onKeydown(e: KeyboardEvent): void {
-        this.eventService.dispatchEvent(e);
-        e.stopPropagation();
+    constructor(private timepickerService: NgxMaterialTimepickerService) {
     }
 
     ngOnInit(): void {

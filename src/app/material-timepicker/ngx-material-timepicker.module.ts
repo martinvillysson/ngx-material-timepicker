@@ -7,30 +7,30 @@ import { TimepickerDirective } from './directives/ngx-timepicker.directive';
 import { NgxMaterialTimepickerToggleIconDirective } from './directives/ngx-material-timepicker-toggle-icon.directive';
 import { NgxMaterialTimepickerThemeDirective } from './directives/ngx-material-timepicker-theme.directive';
 import {
-    NgxMaterialTimepicker24HoursFaceComponent
+  NgxMaterialTimepicker24HoursFaceComponent
 } from './components/timepicker-24-hours-face/ngx-material-timepicker-24-hours-face.component';
 import {
-    NgxMaterialTimepicker12HoursFaceComponent
+  NgxMaterialTimepicker12HoursFaceComponent
 } from './components/timepicker-12-hours-face/ngx-material-timepicker-12-hours-face.component';
 import {
-    NgxMaterialTimepickerMinutesFaceComponent } from './components/timepicker-minutes-face/ngx-material-timepicker-minutes-face.component';
+  NgxMaterialTimepickerMinutesFaceComponent
+} from './components/timepicker-minutes-face/ngx-material-timepicker-minutes-face.component';
 import { NgxMaterialTimepickerFaceComponent } from './components/timepicker-face/ngx-material-timepicker-face.component';
 import { NgxMaterialTimepickerButtonComponent } from './components/timepicker-button/ngx-material-timepicker-button.component';
 import { NgxMaterialTimepickerDialComponent } from './components/timepicker-dial/ngx-material-timepicker-dial.component';
 import {
-    NgxMaterialTimepickerDialControlComponent } from './components/timepicker-dial-control/ngx-material-timepicker-dial-control.component';
+  NgxMaterialTimepickerDialControlComponent
+} from './components/timepicker-dial-control/ngx-material-timepicker-dial-control.component';
 import { NgxMaterialTimepickerPeriodComponent } from './components/timepicker-period/ngx-material-timepicker-period.component';
 import { StyleSanitizerPipe } from './pipes/style-sanitizer.pipe';
 import { TimeFormatterPipe } from './pipes/time-formatter.pipe';
-import { OverlayDirective } from './directives/overlay.directive';
 import { MinutesFormatterPipe } from './pipes/minutes-formatter.pipe';
-import { AutofocusDirective } from './directives/autofocus.directive';
 import { NgxTimepickerFieldComponent } from './components/timepicker-field/ngx-timepicker-field.component';
 import {
-    NgxTimepickerTimeControlComponent
+  NgxTimepickerTimeControlComponent
 } from './components/timepicker-field/timepicker-time-control/ngx-timepicker-time-control.component';
 import {
-    NgxTimepickerPeriodSelectorComponent
+  NgxTimepickerPeriodSelectorComponent
 } from './components/timepicker-field/timepicker-period-selector/ngx-timepicker-period-selector.component';
 import { TimeLocalizerPipe } from './pipes/time-localizer.pipe';
 import { TIME_LOCALE } from './tokens/time-locale.token';
@@ -39,64 +39,67 @@ import { TimeParserPipe } from './pipes/time-parser.pipe';
 import { ActiveHourPipe } from './pipes/active-hour.pipe';
 import { ActiveMinutePipe } from './pipes/active-minute.pipe';
 import {
-    NgxMaterialTimepickerContentComponent
+  NgxMaterialTimepickerContentComponent
 } from './components/ngx-material-timepicker-content/ngx-material-timepicker-content.component';
-
+import { PortalModule } from '@angular/cdk/portal';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule
-    ],
-    exports: [
-        NgxMaterialTimepickerComponent,
-        NgxMaterialTimepickerToggleComponent,
-        NgxTimepickerFieldComponent,
-        TimepickerDirective,
-        NgxMaterialTimepickerToggleIconDirective,
-        NgxMaterialTimepickerThemeDirective
-    ],
-    declarations: [
-        NgxMaterialTimepickerComponent,
-        NgxMaterialTimepicker24HoursFaceComponent,
-        NgxMaterialTimepicker12HoursFaceComponent,
-        NgxMaterialTimepickerMinutesFaceComponent,
-        NgxMaterialTimepickerFaceComponent,
-        NgxMaterialTimepickerToggleComponent,
-        NgxMaterialTimepickerButtonComponent,
-        NgxMaterialTimepickerDialComponent,
-        NgxMaterialTimepickerDialControlComponent,
-        NgxMaterialTimepickerPeriodComponent,
-        StyleSanitizerPipe,
-        TimeFormatterPipe,
-        TimepickerDirective,
-        OverlayDirective,
-        NgxMaterialTimepickerToggleIconDirective,
-        AutofocusDirective,
-        MinutesFormatterPipe,
-        NgxMaterialTimepickerThemeDirective,
-        NgxTimepickerFieldComponent,
-        NgxTimepickerTimeControlComponent,
-        NgxTimepickerPeriodSelectorComponent,
-        TimeLocalizerPipe,
-        TimeParserPipe,
-        ActiveHourPipe,
-        ActiveMinutePipe,
-        NgxMaterialTimepickerContentComponent
-    ],
-    providers: [
-        {provide: TIME_LOCALE, useValue: TimeAdapter.DEFAULT_LOCALE}
-    ],
-    entryComponents: [NgxMaterialTimepickerContentComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    PortalModule,
+    OverlayModule
+  ],
+  exports: [
+    NgxMaterialTimepickerComponent,
+    NgxMaterialTimepickerToggleComponent,
+    NgxTimepickerFieldComponent,
+    TimepickerDirective,
+    NgxMaterialTimepickerToggleIconDirective,
+    NgxMaterialTimepickerThemeDirective
+  ],
+  declarations: [
+    AutofocusDirective,
+    NgxMaterialTimepickerComponent,
+    NgxMaterialTimepicker24HoursFaceComponent,
+    NgxMaterialTimepicker12HoursFaceComponent,
+    NgxMaterialTimepickerMinutesFaceComponent,
+    NgxMaterialTimepickerFaceComponent,
+    NgxMaterialTimepickerToggleComponent,
+    NgxMaterialTimepickerButtonComponent,
+    NgxMaterialTimepickerDialComponent,
+    NgxMaterialTimepickerDialControlComponent,
+    NgxMaterialTimepickerPeriodComponent,
+    StyleSanitizerPipe,
+    TimeFormatterPipe,
+    TimepickerDirective,
+    NgxMaterialTimepickerToggleIconDirective,
+    MinutesFormatterPipe,
+    NgxMaterialTimepickerThemeDirective,
+    NgxTimepickerFieldComponent,
+    NgxTimepickerTimeControlComponent,
+    NgxTimepickerPeriodSelectorComponent,
+    TimeLocalizerPipe,
+    TimeParserPipe,
+    ActiveHourPipe,
+    ActiveMinutePipe,
+    NgxMaterialTimepickerContentComponent
+  ],
+  providers: [
+    { provide: TIME_LOCALE, useValue: TimeAdapter.DEFAULT_LOCALE }
+  ],
+  entryComponents: [NgxMaterialTimepickerContentComponent]
 })
 export class NgxMaterialTimepickerModule {
 
-    static setLocale(locale: string): ModuleWithProviders {
-        return {
-            ngModule: NgxMaterialTimepickerModule,
-            providers: [
-                {provide: TIME_LOCALE, useValue: locale}
-            ]
-        };
-    }
+  static setLocale(locale: string): ModuleWithProviders {
+    return {
+      ngModule: NgxMaterialTimepickerModule,
+      providers: [
+        { provide: TIME_LOCALE, useValue: locale }
+      ]
+    };
+  }
 }

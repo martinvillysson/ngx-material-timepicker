@@ -5,6 +5,8 @@
     },
     "whitelistedNonPeerDependencies": [
         "luxon",
+        "@angular/cdk",
+        "@angular/material",
         "@types/luxon"
     ]
 }

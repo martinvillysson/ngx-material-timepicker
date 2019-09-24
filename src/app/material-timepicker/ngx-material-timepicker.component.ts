@@ -1,26 +1,35 @@
-import { Component, EventEmitter, Input, OnDestroy, Output, TemplateRef } from '@angular/core';
-import { merge, Subject } from 'rxjs';
-import { NgxMaterialTimepickerEventService } from './services/ngx-material-timepicker-event.service';
-import { filter, takeUntil } from 'rxjs/operators';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ElementRef,
+  ViewChild,
+  ViewContainerRef,
+  OnDestroy,
+  ViewEncapsulation } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { TimepickerDirective } from './directives/ngx-timepicker.directive';
 import { DateTime } from 'luxon';
-import { DomService } from './services/dom.service';
 import {
     NgxMaterialTimepickerContentComponent
 } from './components/ngx-material-timepicker-content/ngx-material-timepicker-content.component';
 import { TimepickerRef } from './models/timepicker-ref.interface';
-
+import {ComponentPortal} from '@angular/cdk/portal';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 const ESCAPE = 27;
 
 @Component({
     selector: 'ngx-material-timepicker',
-    template: '',
+    templateUrl: 'ngx-material-timepicker.component.html',
+    styleUrls: ['./ngx-material-timepicker.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class NgxMaterialTimepickerComponent implements OnDestroy, TimepickerRef {
-
+export class NgxMaterialTimepickerComponent implements TimepickerRef, OnDestroy {
     timeUpdated = new Subject<string>();
-
+    @ViewChild('pickerTmpl', { static: true }) pickerTmpl: TemplateRef<any>;
     @Input() cancelBtnTmpl: TemplateRef<Node>;
     @Input() editableHintTmpl: TemplateRef<Node>;
     @Input() confirmBtnTmpl: TemplateRef<Node>;
@@ -29,6 +38,12 @@ export class NgxMaterialTimepickerComponent implements OnDestroy, TimepickerRef 
     @Input() preventOverlayClick: boolean;
     @Input() disableAnimation: boolean;
     @Input() defaultTime: string;
+    @Input() trigger: ElementRef;
+    overlayRef: OverlayRef;
+    overlayDetachmentsSubscription: any;
+    overlayBackdropClickSubscription: any;
+    overlayKeyDownSubscription: any;
+    subscriptions = new Subscription();
 
     @Input()
     set format(value: number) {
@@ -60,16 +75,8 @@ export class NgxMaterialTimepickerComponent implements OnDestroy, TimepickerRef 
     private _minutesGap: number;
     private _format: number;
     private timepickerInput: TimepickerDirective;
-    private unsubscribe = new Subject();
 
-    constructor(private eventService: NgxMaterialTimepickerEventService,
-                private domService: DomService) {
-
-        merge(this.eventService.backdropClick,
-            this.eventService.keydownEvent.pipe(filter(e => e.keyCode === ESCAPE && this.isEsc)))
-            .pipe(takeUntil(this.unsubscribe))
-            .subscribe(() => this.close());
-
+    constructor(private overlay: Overlay, private vcr: ViewContainerRef) {
     }
 
     get minTime(): DateTime {
@@ -96,32 +103,70 @@ export class NgxMaterialTimepickerComponent implements OnDestroy, TimepickerRef 
         if (this.timepickerInput) {
             throw Error('A Timepicker can only be associated with a single input.');
         }
+
         this.timepickerInput = input;
+        this.trigger = input.elementRef;
     }
 
     open(): void {
-        this.domService.appendTimepickerToBody(NgxMaterialTimepickerContentComponent, {
-            timepickerBaseRef: this,
-            time: this.time,
-            defaultTime: this.defaultTime,
-            maxTime: this.maxTime,
-            minTime: this.minTime,
-            format: this.format,
-            minutesGap: this.minutesGap,
-            disableAnimation: this.disableAnimation,
-            cancelBtnTmpl: this.cancelBtnTmpl,
-            confirmBtnTmpl: this.confirmBtnTmpl,
-            editableHintTmpl: this.editableHintTmpl,
-            disabled: this.disabled,
-            enableKeyboardInput: this.enableKeyboardInput,
-            preventOverlayClick: this.preventOverlayClick
-        });
+
+      const positionStrategy = this.overlay
+        .position()
+        .flexibleConnectedTo(this.trigger)
+        .withPositions([{originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center'}]);
+
+      this.overlayRef = this.overlay.create({
+        hasBackdrop: true,
+        positionStrategy: positionStrategy,
+        disposeOnNavigation: true,
+      });
+
+      this.subscriptions.add(this.overlayRef
+      .keydownEvents()
+      .subscribe((event: KeyboardEvent) => {
+        if (event.key !== undefined) {
+          if (event.key === 'Escape') {
+            this.overlayRef.detach();
+          }
+        } else {
+          // tslint:disable-next-line:deprecation
+          if (event.keyCode === ESCAPE) {
+            this.overlayRef.detach();
+          }
+        }
+      }));
+
+      this.subscriptions.add(this.overlayRef.backdropClick().subscribe((event: MouseEvent) => {
+        this.overlayRef.detach();
+      }));
+
+      this.subscriptions.add(this.overlayRef.detachments().subscribe(() => {
+        this.closed.next();
+      }));
+
+      const ngxMaterialTimepickerContentComponentPortal = new ComponentPortal(NgxMaterialTimepickerContentComponent, this.vcr);
+
+        const ngxMaterialTimepickerContentComponent = this.overlayRef.attach(ngxMaterialTimepickerContentComponentPortal);
+
+        ngxMaterialTimepickerContentComponent.instance.timepickerBaseRef = this;
+        ngxMaterialTimepickerContentComponent.instance.time = this.time;
+        ngxMaterialTimepickerContentComponent.instance.defaultTime = this.defaultTime;
+        ngxMaterialTimepickerContentComponent.instance.maxTime = this.maxTime;
+        ngxMaterialTimepickerContentComponent.instance.minTime = this.minTime;
+        ngxMaterialTimepickerContentComponent.instance.format = this.format;
+        ngxMaterialTimepickerContentComponent.instance.minutesGap = this.minutesGap;
+        ngxMaterialTimepickerContentComponent.instance.disableAnimation = this.disableAnimation;
+        ngxMaterialTimepickerContentComponent.instance.cancelBtnTmpl = this.cancelBtnTmpl;
+        ngxMaterialTimepickerContentComponent.instance.confirmBtnTmpl = this.confirmBtnTmpl;
+        ngxMaterialTimepickerContentComponent.instance.editableHintTmpl = this.editableHintTmpl;
+        ngxMaterialTimepickerContentComponent.instance.disabled = this.disabled;
+        ngxMaterialTimepickerContentComponent.instance.enableKeyboardInput = this.enableKeyboardInput;
+        ngxMaterialTimepickerContentComponent.instance.preventOverlayClick = this.preventOverlayClick;
         this.opened.next();
     }
 
     close(): void {
-        this.domService.destroyTimepicker();
-        this.closed.next();
+        this.overlayRef.detach();
     }
 
     updateTime(time: string): void {
@@ -129,8 +174,6 @@ export class NgxMaterialTimepickerComponent implements OnDestroy, TimepickerRef 
     }
 
     ngOnDestroy(): void {
-        this.unsubscribe.next();
-        this.unsubscribe.complete();
+      this.subscriptions.unsubscribe();
     }
-
 }

@@ -125,7 +125,7 @@ export class TimepickerDirective implements ControlValueAccessor, OnDestroy, OnC
     private onChange: (value: any) => void = () => {
     }
 
-    constructor(private elementRef: ElementRef,
+    constructor(public elementRef: ElementRef,
                 @Inject(TIME_LOCALE) private locale: string) {
     }
 

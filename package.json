@@ -30,7 +30,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build --prod",
-        "lint": "ng lint",
+        "lint": "ng lint --fix",
         "test": "ng test --watch=false --code-coverage --browsers ChromeHeadlessNoSandbox",
         "test:watch": "ng test --watch=true --browsers ChromeHeadlessNoSandbox --code-coverage",
         "codecov": "codecov",
@@ -41,12 +41,14 @@
     "types": ".src/app/material-timepicker/index.d.ts",
     "private": false,
     "dependencies": {
-        "luxon": "^1.11.3",
-        "@types/luxon": "^1.11.1"
+        "@angular/cdk": "^8.2.0",
+        "@angular/material": "^8.2.0",
+        "@types/luxon": "^1.11.1",
+        "luxon": "^1.11.3"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.800.0",
-        "@angular/animations": "^8.0.0",
+        "@angular/animations": "^8.2.7",
         "@angular/cli": "^8.0.0",
         "@angular/common": "^8.0.0",
         "@angular/compiler": "^8.0.0",
@@ -83,6 +85,7 @@
         "ts-node": "~4.1.0",
         "tsickle": "^0.35.0",
         "tslint": "~5.9.1",
+        "tslint-etc": "1.6.0",
         "typescript": "3.4.5",
         "zone.js": "~0.9.1"
     }

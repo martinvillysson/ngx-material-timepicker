@@ -1,4 +1,5 @@
 {
+  "extends": ["tslint-etc"],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -135,6 +136,15 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": false,
-    "directive-class-suffix": false
+    "directive-class-suffix": false,
+    "no-unused-declaration": {
+      "options": [
+        {
+          "declarations": true,
+          "imports": true
+        }
+      ],
+      "severity": "error"
+    }
   }
 }
