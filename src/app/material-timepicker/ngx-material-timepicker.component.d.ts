@@ -3,7 +3,7 @@ import { Subject, Subscription } from 'rxjs';
 import { TimepickerDirective } from './directives/ngx-timepicker.directive';
 import { DateTime } from 'luxon';
 import { TimepickerRef } from './models/timepicker-ref.interface';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, ConnectedPosition } from '@angular/cdk/overlay';
 export declare class NgxMaterialTimepickerComponent implements TimepickerRef, OnDestroy {
     private overlay;
     private vcr;
@@ -18,6 +18,7 @@ export declare class NgxMaterialTimepickerComponent implements TimepickerRef, On
     disableAnimation: boolean;
     defaultTime: string;
     trigger: ElementRef;
+    positions: ConnectedPosition[];
     overlayRef: OverlayRef;
     overlayDetachmentsSubscription: any;
     overlayBackdropClickSubscription: any;
