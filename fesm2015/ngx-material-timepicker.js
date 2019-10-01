@@ -393,6 +393,7 @@ let NgxMaterialTimepickerComponent = class NgxMaterialTimepickerComponent {
             .flexibleConnectedTo(this.trigger)
             .withPositions(this.positions);
         this.overlayRef = this.overlay.create({
+            panelClass: this.panelClass,
             hasBackdrop: true,
             positionStrategy: positionStrategy,
             disposeOnNavigation: true,
@@ -486,6 +487,10 @@ __decorate([
     Input(),
     __metadata("design:type", ElementRef)
 ], NgxMaterialTimepickerComponent.prototype, "trigger", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", String)
+], NgxMaterialTimepickerComponent.prototype, "panelClass", void 0);
 __decorate([
     Input(),
     __metadata("design:type", Array)

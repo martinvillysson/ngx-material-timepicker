@@ -18,6 +18,7 @@ export declare class NgxMaterialTimepickerComponent implements TimepickerRef, On
     disableAnimation: boolean;
     defaultTime: string;
     trigger: ElementRef;
+    panelClass: string;
     positions: ConnectedPosition[];
     overlayRef: OverlayRef;
     overlayDetachmentsSubscription: any;
