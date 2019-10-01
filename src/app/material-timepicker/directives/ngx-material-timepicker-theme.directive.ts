@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, Input} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, Input, Renderer2} from '@angular/core';
 import {NgxMaterialTimepickerTheme} from '../models/ngx-material-timepicker-theme.interface';
 
 @Directive({selector: '[ngxMaterialTimepickerTheme]'})
@@ -8,7 +8,7 @@ export class NgxMaterialTimepickerThemeDirective implements AfterViewInit {
 
     private element: HTMLElement;
 
-    constructor(elementRef: ElementRef) {
+    constructor(elementRef: ElementRef, private renderer: Renderer2) {
         this.element = elementRef.nativeElement;
     }
 
@@ -24,7 +24,7 @@ export class NgxMaterialTimepickerThemeDirective implements AfterViewInit {
                 if (typeof theme[val] === 'string') {
                     for (const prop in theme) {
                         if (theme.hasOwnProperty(prop)) {
-                            this.element.style.setProperty(`--${camelCaseToDash(prop)}`, theme[prop]);
+                            this.renderer.setStyle(this.element, `--${camelCaseToDash(prop)}`, theme[prop]);
                         }
                     }
                     return;

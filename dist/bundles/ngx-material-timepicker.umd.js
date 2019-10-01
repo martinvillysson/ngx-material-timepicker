@@ -427,6 +427,7 @@
             this.vcr = vcr;
             this.timeUpdated = new rxjs.Subject();
             this.isEsc = true;
+            this.positions = [{ originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' }];
             this.subscriptions = new rxjs.Subscription();
             this.timeSet = new core.EventEmitter();
             this.opened = new core.EventEmitter();
@@ -501,7 +502,7 @@
             var positionStrategy = this.overlay
                 .position()
                 .flexibleConnectedTo(this.trigger)
-                .withPositions([{ originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' }]);
+                .withPositions(this.positions);
             this.overlayRef = this.overlay.create({
                 hasBackdrop: true,
                 positionStrategy: positionStrategy,
@@ -595,6 +596,10 @@
             core.Input(),
             __metadata("design:type", core.ElementRef)
         ], NgxMaterialTimepickerComponent.prototype, "trigger", void 0);
+        __decorate([
+            core.Input(),
+            __metadata("design:type", Array)
+        ], NgxMaterialTimepickerComponent.prototype, "positions", void 0);
         __decorate([
             core.Input(),
             __metadata("design:type", Number),
@@ -895,7 +900,8 @@
     }());
 
     var NgxMaterialTimepickerThemeDirective = /** @class */ (function () {
-        function NgxMaterialTimepickerThemeDirective(elementRef) {
+        function NgxMaterialTimepickerThemeDirective(elementRef, renderer) {
+            this.renderer = renderer;
             this.element = elementRef.nativeElement;
         }
         NgxMaterialTimepickerThemeDirective.prototype.ngAfterViewInit = function () {
@@ -909,7 +915,7 @@
                     if (typeof theme[val] === 'string') {
                         for (var prop in theme) {
                             if (theme.hasOwnProperty(prop)) {
-                                this.element.style.setProperty("--" + camelCaseToDash(prop), theme[prop]);
+                                this.renderer.setStyle(this.element, "--" + camelCaseToDash(prop), theme[prop]);
                             }
                         }
                         return;
@@ -924,7 +930,7 @@
         ], NgxMaterialTimepickerThemeDirective.prototype, "theme", void 0);
         NgxMaterialTimepickerThemeDirective = __decorate([
             core.Directive({ selector: '[ngxMaterialTimepickerTheme]' }),
-            __metadata("design:paramtypes", [core.ElementRef])
+            __metadata("design:paramtypes", [core.ElementRef, core.Renderer2])
         ], NgxMaterialTimepickerThemeDirective);
         return NgxMaterialTimepickerThemeDirective;
     }());

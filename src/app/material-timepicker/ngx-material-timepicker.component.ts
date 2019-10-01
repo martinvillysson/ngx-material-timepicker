@@ -17,7 +17,7 @@ import {
 } from './components/ngx-material-timepicker-content/ngx-material-timepicker-content.component';
 import { TimepickerRef } from './models/timepicker-ref.interface';
 import {ComponentPortal} from '@angular/cdk/portal';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, ConnectedPosition } from '@angular/cdk/overlay';
 
 const ESCAPE = 27;
 
@@ -39,6 +39,7 @@ export class NgxMaterialTimepickerComponent implements TimepickerRef, OnDestroy 
     @Input() disableAnimation: boolean;
     @Input() defaultTime: string;
     @Input() trigger: ElementRef;
+    @Input() positions: ConnectedPosition[] = [{originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top'}];
     overlayRef: OverlayRef;
     overlayDetachmentsSubscription: any;
     overlayBackdropClickSubscription: any;
@@ -113,7 +114,7 @@ export class NgxMaterialTimepickerComponent implements TimepickerRef, OnDestroy 
       const positionStrategy = this.overlay
         .position()
         .flexibleConnectedTo(this.trigger)
-        .withPositions([{originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center'}]);
+        .withPositions(this.positions);
 
       this.overlayRef = this.overlay.create({
         hasBackdrop: true,

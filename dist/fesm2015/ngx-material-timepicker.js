@@ -1,5 +1,5 @@
 import { __decorate, __metadata, __param } from 'tslib';
-import { ɵɵdefineInjectable, Injectable, Input, Component, EventEmitter, ViewChild, TemplateRef, ElementRef, Output, ViewEncapsulation, ViewContainerRef, Directive, ContentChild, InjectionToken, forwardRef, HostListener, Inject, ChangeDetectionStrategy, Pipe, Optional, NgModule } from '@angular/core';
+import { ɵɵdefineInjectable, Injectable, Input, Component, EventEmitter, ViewChild, TemplateRef, ElementRef, Output, ViewEncapsulation, ViewContainerRef, Directive, ContentChild, InjectionToken, forwardRef, HostListener, Inject, Renderer2, ChangeDetectionStrategy, Pipe, Optional, NgModule } from '@angular/core';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { trigger, transition, style, animate, sequence } from '@angular/animations';
@@ -341,6 +341,7 @@ let NgxMaterialTimepickerComponent = class NgxMaterialTimepickerComponent {
         this.vcr = vcr;
         this.timeUpdated = new Subject();
         this.isEsc = true;
+        this.positions = [{ originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' }];
         this.subscriptions = new Subscription();
         this.timeSet = new EventEmitter();
         this.opened = new EventEmitter();
@@ -390,7 +391,7 @@ let NgxMaterialTimepickerComponent = class NgxMaterialTimepickerComponent {
         const positionStrategy = this.overlay
             .position()
             .flexibleConnectedTo(this.trigger)
-            .withPositions([{ originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' }]);
+            .withPositions(this.positions);
         this.overlayRef = this.overlay.create({
             hasBackdrop: true,
             positionStrategy: positionStrategy,
@@ -485,6 +486,10 @@ __decorate([
     Input(),
     __metadata("design:type", ElementRef)
 ], NgxMaterialTimepickerComponent.prototype, "trigger", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Array)
+], NgxMaterialTimepickerComponent.prototype, "positions", void 0);
 __decorate([
     Input(),
     __metadata("design:type", Number),
@@ -747,7 +752,8 @@ TimepickerDirective = __decorate([
 ], TimepickerDirective);
 
 let NgxMaterialTimepickerThemeDirective = class NgxMaterialTimepickerThemeDirective {
-    constructor(elementRef) {
+    constructor(elementRef, renderer) {
+        this.renderer = renderer;
         this.element = elementRef.nativeElement;
     }
     ngAfterViewInit() {
@@ -761,7 +767,7 @@ let NgxMaterialTimepickerThemeDirective = class NgxMaterialTimepickerThemeDirect
                 if (typeof theme[val] === 'string') {
                     for (const prop in theme) {
                         if (theme.hasOwnProperty(prop)) {
-                            this.element.style.setProperty(`--${camelCaseToDash(prop)}`, theme[prop]);
+                            this.renderer.setStyle(this.element, `--${camelCaseToDash(prop)}`, theme[prop]);
                         }
                     }
                     return;
@@ -777,7 +783,7 @@ __decorate([
 ], NgxMaterialTimepickerThemeDirective.prototype, "theme", void 0);
 NgxMaterialTimepickerThemeDirective = __decorate([
     Directive({ selector: '[ngxMaterialTimepickerTheme]' }),
-    __metadata("design:paramtypes", [ElementRef])
+    __metadata("design:paramtypes", [ElementRef, Renderer2])
 ], NgxMaterialTimepickerThemeDirective);
 function camelCaseToDash(myStr) {
     return myStr.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
