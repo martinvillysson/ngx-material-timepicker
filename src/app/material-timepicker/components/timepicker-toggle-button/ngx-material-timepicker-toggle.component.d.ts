@@ -2,7 +2,8 @@ import { NgxMaterialTimepickerToggleIconDirective } from '../../directives/ngx-m
 import { NgxMaterialTimepickerComponent } from '../../ngx-material-timepicker.component';
 export declare class NgxMaterialTimepickerToggleComponent {
     timepicker: NgxMaterialTimepickerComponent;
-    disabled: boolean;
+    get disabled(): boolean;
+    set disabled(value: boolean);
     private _disabled;
     customIcon: NgxMaterialTimepickerToggleIconDirective;
     open(event: any): void;

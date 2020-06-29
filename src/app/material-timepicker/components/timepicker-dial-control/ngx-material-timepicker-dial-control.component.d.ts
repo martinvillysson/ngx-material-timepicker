@@ -16,7 +16,7 @@ export declare class NgxMaterialTimepickerDialControlComponent {
     focused: EventEmitter<null>;
     unfocused: EventEmitter<null>;
     constructor(timeParserPipe: TimeParserPipe);
-    private readonly selectedTime;
+    private get selectedTime();
     saveTimeAndChangeTimeUnit(event: FocusEvent, unit: TimeUnit): void;
     updateTime(): void;
     onKeyDown(e: KeyboardEvent): void;

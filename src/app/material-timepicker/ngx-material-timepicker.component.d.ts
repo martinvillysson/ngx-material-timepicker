@@ -25,8 +25,10 @@ export declare class NgxMaterialTimepickerComponent implements TimepickerRef, On
     overlayBackdropClickSubscription: any;
     overlayKeyDownSubscription: any;
     subscriptions: Subscription;
-    format: number;
-    minutesGap: number;
+    set format(value: number);
+    get format(): number;
+    set minutesGap(gap: number);
+    get minutesGap(): number;
     timeSet: EventEmitter<string>;
     opened: EventEmitter<null>;
     closed: EventEmitter<null>;
@@ -35,10 +37,10 @@ export declare class NgxMaterialTimepickerComponent implements TimepickerRef, On
     private _format;
     private timepickerInput;
     constructor(overlay: Overlay, vcr: ViewContainerRef);
-    readonly minTime: DateTime;
-    readonly maxTime: DateTime;
-    readonly disabled: boolean;
-    readonly time: string;
+    get minTime(): DateTime;
+    get maxTime(): DateTime;
+    get disabled(): boolean;
+    get time(): string;
     /***
      * Register an input with this timepicker.
      * input - The timepicker input to register with this timepicker

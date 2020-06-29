@@ -1,4 +1,4 @@
 import { ModuleWithProviders } from '@angular/core';
 export declare class NgxMaterialTimepickerModule {
-    static setLocale(locale: string): ModuleWithProviders;
+    static setLocale(locale: string): ModuleWithProviders<NgxMaterialTimepickerModule>;
 }

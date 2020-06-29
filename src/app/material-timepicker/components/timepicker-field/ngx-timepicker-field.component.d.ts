@@ -23,8 +23,10 @@ export declare class NgxTimepickerFieldComponent implements OnInit, OnDestroy, C
     controlOnly: boolean;
     cancelBtnTmpl: TemplateRef<Node>;
     confirmBtnTmpl: TemplateRef<Node>;
-    format: number;
-    defaultTime: string;
+    set format(value: number);
+    get format(): number;
+    set defaultTime(val: string);
+    get defaultTime(): string;
     private _defaultTime;
     private _format;
     private previousFormat;

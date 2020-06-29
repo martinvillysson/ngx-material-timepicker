@@ -4,7 +4,7 @@ export declare class NgxTimepickerPeriodSelectorComponent {
     private locale;
     isOpened: boolean;
     disabled: boolean;
-    selectedPeriod: TimePeriod;
+    set selectedPeriod(period: TimePeriod);
     periodSelected: EventEmitter<TimePeriod>;
     period: typeof TimePeriod;
     meridiems: string[];

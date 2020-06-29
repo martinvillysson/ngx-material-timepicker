@@ -33,7 +33,7 @@ export declare class NgxMaterialTimepickerContentComponent implements OnInit, On
     maxTime: DateTime;
     time: string;
     timepickerBaseRef: TimepickerRef;
-    defaultTime: string;
+    set defaultTime(time: string);
     private unsubscribe;
     constructor(timepickerService: NgxMaterialTimepickerService);
     ngOnInit(): void;

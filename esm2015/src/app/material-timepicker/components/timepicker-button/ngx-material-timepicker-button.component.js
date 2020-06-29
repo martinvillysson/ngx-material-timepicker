@@ -1,13 +1,11 @@
-import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
-let NgxMaterialTimepickerButtonComponent = class NgxMaterialTimepickerButtonComponent {
-};
-NgxMaterialTimepickerButtonComponent = tslib_1.__decorate([
-    Component({
-        selector: 'ngx-material-timepicker-button',
-        template: "<button class=\"timepicker-button\" type=\"button\">\r\n  <span><ng-content></ng-content></span>\r\n</button>\r\n",
-        styles: [".timepicker-button{display:inline-block;height:36px;min-width:88px;line-height:36px;border:12px;border-radius:2px;background-color:transparent;text-align:center;transition:450ms cubic-bezier(.23,1,.32,1);overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;cursor:pointer;outline:0;color:#00bfff}@supports (color:var(--button-color)){.timepicker-button{color:var(--button-color)}}.timepicker-button:focus,.timepicker-button:hover{background-color:rgba(153,153,153,.2)}.timepicker-button>span{font-size:14px;text-transform:uppercase;font-weight:600;padding-left:16px;padding-right:16px;font-family:Roboto,sans-serif}@supports (font-family:var(--primary-font-family)){.timepicker-button>span{font-family:var(--primary-font-family)}}"]
-    })
-], NgxMaterialTimepickerButtonComponent);
-export { NgxMaterialTimepickerButtonComponent };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItYnV0dG9uLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25neC1tYXRlcmlhbC10aW1lcGlja2VyLyIsInNvdXJjZXMiOlsic3JjL2FwcC9tYXRlcmlhbC10aW1lcGlja2VyL2NvbXBvbmVudHMvdGltZXBpY2tlci1idXR0b24vbmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItYnV0dG9uLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFDLFNBQVMsRUFBQyxNQUFNLGVBQWUsQ0FBQztBQU94QyxJQUFhLG9DQUFvQyxHQUFqRCxNQUFhLG9DQUFvQztDQUNoRCxDQUFBO0FBRFksb0NBQW9DO0lBTGhELFNBQVMsQ0FBQztRQUNQLFFBQVEsRUFBRSxnQ0FBZ0M7UUFDMUMsNkhBQThEOztLQUVqRSxDQUFDO0dBQ1csb0NBQW9DLENBQ2hEO1NBRFksb0NBQW9DIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtDb21wb25lbnR9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xyXG5cclxuQENvbXBvbmVudCh7XHJcbiAgICBzZWxlY3RvcjogJ25neC1tYXRlcmlhbC10aW1lcGlja2VyLWJ1dHRvbicsXHJcbiAgICB0ZW1wbGF0ZVVybDogJy4vbmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItYnV0dG9uLmNvbXBvbmVudC5odG1sJyxcclxuICAgIHN0eWxlVXJsczogWycuL25neC1tYXRlcmlhbC10aW1lcGlja2VyLWJ1dHRvbi5jb21wb25lbnQuc2NzcyddXHJcbn0pXHJcbmV4cG9ydCBjbGFzcyBOZ3hNYXRlcmlhbFRpbWVwaWNrZXJCdXR0b25Db21wb25lbnQge1xyXG59XHJcbiJdfQ==
+export class NgxMaterialTimepickerButtonComponent {
+}
+NgxMaterialTimepickerButtonComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ngx-material-timepicker-button',
+                template: "<button class=\"timepicker-button\" type=\"button\">\r\n  <span><ng-content></ng-content></span>\r\n</button>\r\n",
+                styles: [".timepicker-button{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;background-color:transparent;border:12px;border-radius:2px;color:#00bfff;cursor:pointer;display:inline-block;height:36px;line-height:36px;min-width:88px;outline:none;overflow:hidden;position:relative;text-align:center;transition:all .45s cubic-bezier(.23,1,.32,1);user-select:none}@supports (color:var(--button-color)){.timepicker-button{color:var(--button-color)}}.timepicker-button:focus,.timepicker-button:hover{background-color:hsla(0,0%,60%,.2)}.timepicker-button>span{font-family:Roboto,sans-serif;font-size:14px;font-weight:600;padding-left:16px;padding-right:16px;text-transform:uppercase}@supports (font-family:var(--primary-font-family)){.timepicker-button>span{font-family:var(--primary-font-family)}}"]
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItYnV0dG9uLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3NyYy9hcHAvbWF0ZXJpYWwtdGltZXBpY2tlci9jb21wb25lbnRzL3RpbWVwaWNrZXItYnV0dG9uL25neC1tYXRlcmlhbC10aW1lcGlja2VyLWJ1dHRvbi5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFDLFNBQVMsRUFBQyxNQUFNLGVBQWUsQ0FBQztBQU94QyxNQUFNLE9BQU8sb0NBQW9DOzs7WUFMaEQsU0FBUyxTQUFDO2dCQUNQLFFBQVEsRUFBRSxnQ0FBZ0M7Z0JBQzFDLDZIQUE4RDs7YUFFakUiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge0NvbXBvbmVudH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcblxyXG5AQ29tcG9uZW50KHtcclxuICAgIHNlbGVjdG9yOiAnbmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItYnV0dG9uJyxcclxuICAgIHRlbXBsYXRlVXJsOiAnLi9uZ3gtbWF0ZXJpYWwtdGltZXBpY2tlci1idXR0b24uY29tcG9uZW50Lmh0bWwnLFxyXG4gICAgc3R5bGVVcmxzOiBbJy4vbmd4LW1hdGVyaWFsLXRpbWVwaWNrZXItYnV0dG9uLmNvbXBvbmVudC5zY3NzJ11cclxufSlcclxuZXhwb3J0IGNsYXNzIE5neE1hdGVyaWFsVGltZXBpY2tlckJ1dHRvbkNvbXBvbmVudCB7XHJcbn1cclxuIl19
