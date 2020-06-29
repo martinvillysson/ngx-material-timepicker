@@ -94,7 +94,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 })
 export class NgxMaterialTimepickerModule {
 
-  static setLocale(locale: string): ModuleWithProviders {
+  static setLocale(locale: string): ModuleWithProviders<NgxMaterialTimepickerModule> {
     return {
       ngModule: NgxMaterialTimepickerModule,
       providers: [
